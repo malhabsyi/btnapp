@@ -22,6 +22,7 @@ class HomeController extends Controller
         $nusersuperadmin = $nusersuperadmin->count();
 
         $alloutlet = OutletBtn::where('outlet_status','sewa')->get();
+        $alloutlet = $alloutlet->sortBy('outlet_deadline')->values()->all();
 
         $persensewaoutlet = OutletBtn::where('outlet_status','sewa')->get();
         $persensewaoutlet = ($persensewaoutlet->count()/$noutlet)*100;
