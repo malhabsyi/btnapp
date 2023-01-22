@@ -52,7 +52,7 @@ class UserController extends Controller
         if (Auth::user()->kantor_cabang_id == $user->kantor_cabang_id) {
             return view('user.edit',compact('user'));
         } else {
-            return abort(403);
+            return view('user.index');
         }
     }
     public function update(Request $request,$id){

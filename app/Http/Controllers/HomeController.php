@@ -23,6 +23,8 @@ class HomeController extends Controller
 
         $alloutlet = OutletBtn::where('outlet_status','sewa')->get();
         $alloutlet = $alloutlet->sortBy('outlet_deadline')->values()->all();
+        $nalloutlet = OutletBtn::where('outlet_status','sewa')->get();
+        $nalloutlet = $nalloutlet->count();
 
         $persensewaoutlet = OutletBtn::where('outlet_status','sewa')->get();
         $persensewaoutlet = ($persensewaoutlet->count()/$noutlet)*100;
@@ -32,13 +34,13 @@ class HomeController extends Controller
         $userlogin = Auth::user();
         $userkcb = User::where('kantor_cabang_id',$userlogin->kantor_cabang_id);
 
-        $persenbelumdibayar = OutletBtn::where('outlet_deadline',$userlogin->last_login);
-        $persenbelumdibayar = ($persenbelumdibayar->count()/$noutlet)*100;
+        $persenbelumdibayar = OutletBtn::where('outlet_deadline',$userlogin->last_login)->where('outlet_status', 'sewa');
+        $persenbelumdibayar = ($persenbelumdibayar->count()/$nalloutlet)*100;
 
         $persensudahdibayar = 100-$persenbelumdibayar;
 
         
-        return view ('homepage.index',compact('persensudahdibayar','persenbelumdibayar','persensewaoutlet','persenmilikoutlet','alloutlet','nuseradmin','nusersuperadmin','noutlet','nkantorcabang','nuseradmin','userlogin','userkcb'));
+        return view ('homepage.index',compact('nalloutlet','persensudahdibayar','persenbelumdibayar','persensewaoutlet','persenmilikoutlet','alloutlet','nuseradmin','nusersuperadmin','noutlet','nkantorcabang','nuseradmin','userlogin','userkcb'));
 
     }
 }
