@@ -49,7 +49,11 @@ class UserController extends Controller
     }
     public function edit($id){
         $user = User::find($id);
-        return view('user.edit',compact('user'));
+        if (Auth::user()->kantor_cabang_id == $user->kantor_cabang_id) {
+            return view('user.edit',compact('user'));
+        } else {
+            return abort(403);
+        }
     }
     public function update(Request $request,$id){
         $user = User::find($id);
