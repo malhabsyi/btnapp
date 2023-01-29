@@ -22,6 +22,7 @@ class User extends Authenticatable
         'user_email',
         'password',
         'role',
+        'user_image',
         'kantor_cabang_id',
         'last_login'
         

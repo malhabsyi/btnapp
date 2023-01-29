@@ -41,15 +41,20 @@ class UserController extends Controller
             'last_login'=> Carbon::now()->toDateTimeString()
         ];
         $data['password'] = bcrypt($data['password']);
-        
+        if ($request->hasfile('user_image')){
+            $file = $request->file('user_image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file-> move('uploads/user/',$filename);
+            $data->user_image = $filename;
+        }
         User::create($data);
         //$request->session()->flash('success', 'Registration Successfull! Please Login');
  
-        return redirect('/home')->with('success', 'Registration Successfull! Please Login');
+        return redirect()->back()->with('success', 'Registration Successfull! Please Login');
     }
     public function edit($id){
-        $user = User::find($id);
-        if (Auth::user()->kantor_cabang_id == $user->kantor_cabang_id) {
+        if (Auth::user()->role == 'superadmin') {
             return view('user.edit',compact('user'));
         } else {
             return view('user.index');
@@ -62,17 +67,17 @@ class UserController extends Controller
         $user-> password = $request->input('password');
         $user-> role = $request->input('role');
         $user-> kantor_cabang_id = $request->input('kantor_cabang_id');;
-        // if ($request->hasfile('image')){
-        //     $destination = 'uploads/user/'.$user->image;
-        //     if (File::exists($destination)){
-        //         File::delete($destination);
-        //     }
-        //     $file = $request->file('image');
-        //     $extension = $file->getClientOriginalExtension();
-        //     $filename = time().'.'.$extension;
-        //     $file-> move('uploads/user/',$filename);
-        //     $user->image = $filename;
-        // }
+        if ($request->hasfile('image')){
+            $destination = 'uploads/user/'.$user->image;
+            if (File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file-> move('uploads/user/',$filename);
+            $user->image = $filename;
+        }
         $user->save();
         return redirect()->back()->with('status','Pesan : User telah diperbarui');
     }

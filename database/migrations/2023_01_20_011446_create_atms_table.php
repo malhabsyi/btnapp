@@ -20,7 +20,7 @@ class CreateAtmsTable extends Migration
             $table->string('atm_note');
             $table->string('atm_status');
             $table->foreignId('kantor_cabang_id');
-            $table->foreignId('outlet_id');
+            $table->foreignId('outlet_id')->nullable();
 
         });
     }

@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('role');
             $table->rememberToken();
             $table->String('last_login');
+            $table->String('user_image');
             $table->foreignId('kantor_cabang_id');
         });
     }

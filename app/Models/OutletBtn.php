@@ -15,7 +15,8 @@ class OutletBtn extends Model
         'outlet_location',
         'outlet_deadline',
         'kantor_cabang_id',
-
+        'outlet_note',
+        'outlet_image',
     ];
 
     public function kantorcabang()
