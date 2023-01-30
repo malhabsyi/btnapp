@@ -38,8 +38,8 @@ Route::group(['middleware' =>['auth','cekrole:superadmin']],function(){
 
     //DASHBOARD ADMIN
     Route::get('/akun',[UserController::class, 'index'])->name('akun');
-    Route::get('/registrasi',[UserController::class, 'create'])->name('regitrasi-form');
-    Route::post('/registrasi',[UserController::class, 'store'])->name('registrasi');
+    Route::get('registrasi-form',[UserController::class, 'create'])->name('registrasi-form');
+    Route::post('registrasi',[UserController::class, 'store'])->name('registrasi');
     Route::get('edit-user/{id}',[UserController::class, 'edit']);
     Route::put('update-user/{id}',[UserController::class, 'update']);
 

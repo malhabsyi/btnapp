@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\OutletBtn;
 use App\Models\KantorCabang;
-use App\Models\Items;
+use App\Models\Atm;
 use App\Models\User;
 
 class HomeController extends Controller
@@ -16,10 +16,13 @@ class HomeController extends Controller
 
         $nkantorcabang = KantorCabang::count();
         $noutlet = OutletBtn::count();
-        $nuseradmin = User::where('role','admin')->get();
-        $nuseradmin = $nuseradmin->count();
-        $nusersuperadmin = User::where('role','superadmin')->get();
-        $nusersuperadmin = $nusersuperadmin->count();
+
+        $natmbiasa = Atm::where('atm_jenis','atm')->get();
+        $natmbiasa = $natmbiasa->count();
+        $natmcrm = Atm::where('atm_jenis','crm')->get();
+        $natmcrm = $natmcrm->count();
+        $natmmkk = Atm::where('atm_jenis','mkk')->get();
+        $natmmkk = $natmmkk->count();
 
         $alloutlet = OutletBtn::where('outlet_status','sewa')->get();
         $alloutlet = $alloutlet->sortBy('outlet_deadline')->values()->all();
@@ -28,19 +31,21 @@ class HomeController extends Controller
 
         $persensewaoutlet = OutletBtn::where('outlet_status','sewa')->get();
         $persensewaoutlet = ($persensewaoutlet->count()/$noutlet)*100;
+        $persensewaoutlet = round($persensewaoutlet);
         $persenmilikoutlet = OutletBtn::where('outlet_status','milik perusahaan')->get();
         $persenmilikoutlet = ($persenmilikoutlet->count()/$noutlet)*100;
+        $persenmilikoutlet = round($persenmilikoutlet);
 
         $userlogin = Auth::user();
         $userkcb = User::where('kantor_cabang_id',$userlogin->kantor_cabang_id);
 
         $persenbelumdibayar = OutletBtn::where('outlet_deadline',$userlogin->last_login)->where('outlet_status', 'sewa');
         $persenbelumdibayar = ($persenbelumdibayar->count()/$nalloutlet)*100;
-
+        $persenbelumdibayar = round($persenbelumdibayar);
         $persensudahdibayar = 100-$persenbelumdibayar;
 
         
-        return view ('homepage.index',compact('nalloutlet','persensudahdibayar','persenbelumdibayar','persensewaoutlet','persenmilikoutlet','alloutlet','nuseradmin','nusersuperadmin','noutlet','nkantorcabang','nuseradmin','userlogin','userkcb'));
+        return view ('homepage.index',compact('nalloutlet','persensudahdibayar','persenbelumdibayar','persensewaoutlet','persenmilikoutlet','alloutlet','natmbiasa','natmcrm','natmmkk','noutlet','nkantorcabang','userlogin','userkcb'));
 
     }
 }

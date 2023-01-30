@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\OutletBtn;
 use App\Models\KantorCabang;
 use App\Models\Items;
+use Carbon\Carbon;
 
 
 class UserController extends Controller
@@ -29,6 +30,7 @@ class UserController extends Controller
             'user_name' => 'required',
             'user_email' => 'required',
             'password' => 'required',
+            'user_telp' => 'required',
             'kantor_cabang_id' => 'required',
             'role' => 'required',
         ]);
@@ -37,17 +39,16 @@ class UserController extends Controller
             'user_email' => $validated['user_email'],
             'password' => $validated['password'],
             'role' => $validated['role'],
+            'user_telp' => $validated['user_telp'],
             'kantor_cabang_id' => $validated['kantor_cabang_id'],
-            'last_login'=> Carbon::now()->toDateTimeString()
+            'last_login'=> Carbon::now()->format('Y/m'),
+            'user_image'=> 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png'
+            
         ];
         $data['password'] = bcrypt($data['password']);
-        if ($request->hasfile('user_image')){
-            $file = $request->file('user_image');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
-            $file-> move('uploads/user/',$filename);
-            $data->user_image = $filename;
-        }
+
+
+        
         User::create($data);
         //$request->session()->flash('success', 'Registration Successfull! Please Login');
  

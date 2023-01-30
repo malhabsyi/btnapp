@@ -27,7 +27,7 @@ class LoginController extends Controller
             if(Auth::attempt($credentials)){
                 
                 $userlogin = Auth::user();
-                $userlogin->last_login = Carbon::now()->format('m');
+                $userlogin->last_login = Carbon::now()->format('Y/m');
                 $userlogin->save();
                 $request->session()->regenerate();
                 return redirect()->intended('/home');

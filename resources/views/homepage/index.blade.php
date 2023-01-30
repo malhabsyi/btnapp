@@ -28,7 +28,7 @@
             <div class="assets">
                 <div class="rectangle-parent10">
                     <div class="group-child12"></div>
-                    <b class="outlet13">Outlet</b><b class="admin">{{ $noutlet }} Outlet</b><img class="workstation-icon" alt=""
+                    <b class="outlet13">ATM</b><b class="admin">{{ $natmbiasa }} ATM</b><img class="workstation-icon" alt=""
                         src="img/workstation@2x.png" />
                 </div>
                 <div class="assets-child"></div>
@@ -36,7 +36,7 @@
             <div class="user8">
                 <div class="rectangle-parent11">
                     <div class="group-child13"></div>
-                    <b class="outlet13">User</b><b class="admin" >{{ $nuseradmin }} User</b><img class="male-user-icon" alt=""
+                    <b class="outlet13">CRM</b><b class="admin" >{{ $natmcrm }} CRM</b><img class="male-user-icon" alt=""
                         src="img/male-user@2x.png" />
                 </div>
                 <div class="user-child"></div>
@@ -44,7 +44,7 @@
             <div class="super-admin">
                 <div class="rectangle-parent12">
                     <div class="group-child14"></div>
-                    <b class="outlet13">Super Admin</b><b class="admin">{{ $nusersuperadmin }} Admin</b><img class="male-user-icon" alt=""
+                    <b class="outlet13">MKK</b><b class="admin">{{ $natmmkk }} MKK</b><img class="male-user-icon" alt=""
                         src="img/user-shield@2x.png" />
                 </div>
             </div>
@@ -122,7 +122,7 @@
         <div class="hello4">
             <div class="hello-child2"></div>
             <b class="hello-ananda-segaf4">Hello, {{$userlogin->user_name }}</b><img class="customer-icon4" alt=""
-                src="img/customer@2x.png" />
+                src="{{$userlogin->user_image}}" />
         </div>
         <div class="tab-super-admin4">
             <div class="samping4">
@@ -134,7 +134,8 @@
                             src="img/iconlybolddocument4.svg" />
                     </div>
                 </div>
-                <a href="/User" style="color:#d0d2da">
+                @if($userlogin->role=='superadmin')
+                <a href="{{ 'akun' }}" style="color:#d0d2da">
                     <div class="outlet15">
                         <div class="outlet-child8"></div>
                         <div class="user11">
@@ -143,6 +144,7 @@
                         </div>
                     </div>
                 </a>
+                @endif
                 <a href="/KantorCabang" style="color:#d0d2da">
                     <div class="outlet16">
                         <div class="outlet-child8"></div>
@@ -152,7 +154,7 @@
                     </div>
                 </a>
 
-                <a href="/LoginPage" style="color:#d0d2da">
+                <a href="#" style="color:#d0d2da" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <div class="log-out8">
                         <div class="outlet-child8"></div>
                         <div class="log-out-wrapper2">
@@ -160,6 +162,9 @@
                         </div>
                 </a>
                 <img class="iconlyboldlogout4" alt="" src="img/iconlyboldlogout.svg" />
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </div>
             <div class="samping-child2"></div>
             <img class="logo-btn-14" alt="" src="img/logo-btn-1@2x.png" />
@@ -169,7 +174,10 @@
         <div class="notification-child2"></div>
         <img class="iconlylightfilter4" alt="" src="img/iconlylightfilter.svg" />
         <div class="notification9">Notification</div>
-        <div class="g112">
+        {{ $loc=1 }}
+        @foreach ($alloutlet as $notif)
+        {{ $loc=$loc+1 }}
+        <div class="g11{{ $loc }}">
             <div class="g1-child10"></div>
             <div class="rectangle-parent14">
                 <div class="group-child20"></div>
@@ -177,34 +185,12 @@
             </div>
             <div class="jatuh-tempo12">Jatuh Tempo</div>
             <div class="outlet-kc-mulyosari-container12">
-                <b>Outlet KC Mulyosari</b><span> pada </span><b>Kantor Cabang Mulyosari</b><span> mengalami tenggat
-                    waktu pembayaran pada tanggal </span><b>28 Februari 2023.</b>
+                <b>{{ $notif->outlet_name }}</b><span> pada </span><b>{{ $notif->kantor_cabang_id }}</b><span> mengalami tenggat
+                    waktu pembayaran pada tanggal </span><b>{{ $notif->outlet_deadline }} Februari 2023.</b>
             </div>
         </div>
-        <div class="g113">
-            <div class="g1-child10"></div>
-            <div class="rectangle-parent14">
-                <div class="group-child20"></div>
-                <img class="doorbell-icon12" alt="" src="img/doorbell@2x.png" />
-            </div>
-            <div class="jatuh-tempo12">Jatuh Tempo</div>
-            <div class="outlet-kc-mulyosari-container12">
-                <b>Outlet KC Mulyosari</b><span> pada </span><b>Kantor Cabang Mulyosari</b><span> mengalami tenggat
-                    waktu pembayaran pada tanggal </span><b>28 Februari 2023.</b>
-            </div>
-        </div>
-        <div class="g114">
-            <div class="g1-child10"></div>
-            <div class="rectangle-parent14">
-                <div class="group-child20"></div>
-                <img class="doorbell-icon12" alt="" src="img/doorbell@2x.png" />
-            </div>
-            <div class="jatuh-tempo12">Jatuh Tempo</div>
-            <div class="outlet-kc-mulyosari-container12">
-                <b>Outlet KC Mulyosari</b><span> pada </span><b>Kantor Cabang Mulyosari</b><span> mengalami tenggat
-                    waktu pembayaran pada tanggal </span><b>28 Februari 2023.</b>
-            </div>
-        </div>
+        @endforeach
+
     </div>
     </div>
 
