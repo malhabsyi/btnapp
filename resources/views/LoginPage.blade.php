@@ -28,14 +28,14 @@
             <div class="sign-in-form-child"></div>
             <div class="hello-admin">Hello Admin!</div>
 
-            <form action="/login" method="post">
+            <form action="/login" method="get">
                 <div class="sign-in">Sign in</div>
                 @csrf
                 <div class="username">
                     <div class="enter-your-username" style="margin-left: 25px;">ID</div>
                     <!-- <div class="username-child"></div> -->
-                    <input type="text" class="username-child" placeholder="Masukkan ID" id="user_name"
-                        name="user_name">
+                    <input type="text" class="username-child" placeholder="Masukkan ID" id="nip"
+                        name="nip">
                     <!-- <div class="username-or-email">Masukkan NIP</div> -->
                 </div>
                 <div class="password20">
@@ -51,7 +51,7 @@
             <!-- <img class="akar-iconseye-open" alt="" src="img/akariconseyeopen.svg" /> -->
             <div class="tombol-sign-in">
                 <button class="tombol-sign-in-child"></button>
-                <div class="sign-in1" value="Sign in">Sign in</div>
+                <div class="sign-in1">Sign in</div>
 
             </div>
             </form>

@@ -21,14 +21,14 @@
             <div class="back-rect-2"></div>
             <div class="outlet12">
                 <div class="outlet-child6"></div>
-                <b class="kantor-cabang8">Kantor Cabang</b><b class="kantor">{{ $nkantorcabang }} Kantor</b>
+                <b class="kantor-cabang8">Kantor Cabang</b><b class="kantor">{{$kantorcabang}} Kantor</b>
                 <div class="outlet-child7"></div>
                 <img class="exterior-icon" alt="" src="img/exterior@2x.png" />
             </div>
             <div class="assets">
                 <div class="rectangle-parent10">
                     <div class="group-child12"></div>
-                    <b class="outlet13">Outlet</b><b class="admin">{{ $noutlet }} Outlet</b><img class="workstation-icon" alt=""
+                    <b class="outlet13">Outlet</b><b class="admin">{{$kantorcabang}} Outlet</b><img class="workstation-icon" alt=""
                         src="img/workstation@2x.png" />
                 </div>
                 <div class="assets-child"></div>
@@ -36,7 +36,7 @@
             <div class="user8">
                 <div class="rectangle-parent11">
                     <div class="group-child13"></div>
-                    <b class="outlet13">User</b><b class="admin" >{{ $nuseradmin }} User</b><img class="male-user-icon" alt=""
+                    <b class="outlet13">User</b><b class="admin" >{{$user}} User</b><img class="male-user-icon" alt=""
                         src="img/male-user@2x.png" />
                 </div>
                 <div class="user-child"></div>
@@ -44,7 +44,7 @@
             <div class="super-admin">
                 <div class="rectangle-parent12">
                     <div class="group-child14"></div>
-                    <b class="outlet13">Super Admin</b><b class="admin">{{ $nusersuperadmin }} Admin</b><img class="male-user-icon" alt=""
+                    <b class="outlet13">Super Admin</b><b class="admin">{{$superadmin}} Admin</b><img class="male-user-icon" alt=""
                         src="img/user-shield@2x.png" />
                 </div>
             </div>
@@ -60,11 +60,11 @@
                     Status Outlet</b>
             </div>
             <div class="parent">
-                <b class="b">{{ $persensewaoutlet }}%</b><b class="sewa8">Sewa</b>
+                <b class="b">25%</b><b class="sewa8">Sewa</b>
                 <div class="group-child15"></div>
             </div>
             <div class="group">
-                <b class="b">{{ $persenmilikoutlet }}%</b><b class="sewa8">Milik Perusahaan</b>
+                <b class="b">75%</b><b class="sewa8">Milik Perusahaan</b>
                 <div class="group-child16"></div>
             </div>
             <div class="rectangle-parent13">
@@ -72,7 +72,7 @@
                 <div class="group-child18"></div>
             </div>
             <div class="total-outlet-parent">
-                <b class="total-outlet">Total Outlet</b><b class="b2">{{ $noutlet }}</b>
+                <b class="total-outlet">Total Outlet</b><b class="b2">{{$kantorcabang}}</b>
                 <div class="group-child19"></div>
                 <img class="exterior-icon1" alt="" src="img/exterior@2x.png" /><img class="chevron-down-2-icon" alt=""
                     src="img/chevrondown-2.svg" />
@@ -111,17 +111,17 @@
             <div class="belum-dibayar">
                 <img class="belum-dibayar-child" alt="" src="img/ellipse-3.svg" />
                 <div class="sudah-dibayar">Belum Dibayar</div>
-                <div class="div">{{ $persenbelumdibayar }}%</div>
+                <div class="div">25%</div>
             </div>
             <div class="belum-dibayar2">
                 <img class="belum-dibayar-child" alt="" src="img/ellipse-31.svg" />
                 <div class="sudah-dibayar">Sudah Dibayar</div>
-                <div class="div">{{ $persensudahdibayar }}%</div>
+                <div class="div">75%</div>
             </div>
         </div>
         <div class="hello4">
             <div class="hello-child2"></div>
-            <b class="hello-ananda-segaf4">Hello, {{$userlogin->user_name }}</b><img class="customer-icon4" alt=""
+            <b class="hello-ananda-segaf4">Hello, {{ auth()->user()->frist_name }}</b><img class="customer-icon4" alt=""
                 src="img/customer@2x.png" />
         </div>
         <div class="tab-super-admin4">

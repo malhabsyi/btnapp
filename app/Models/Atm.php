@@ -18,6 +18,7 @@ class Atm extends Model
         'atm_deadline',
         'atm_note',
         'atm_status',
+        'atm_jenis',
     ];
     public function kantorcabang()
     {
