@@ -42,6 +42,7 @@ Route::group(['middleware' =>['auth','cekrole:superadmin']],function(){
     Route::post('registrasi',[UserController::class, 'store'])->name('registrasi');
     Route::get('edit-user/{id}',[UserController::class, 'edit']);
     Route::put('update-user/{id}',[UserController::class, 'update']);
+    Route::post('delete-user/{id}',[UserController::class, 'destroy']);
 
     //ERD
     Route::get('/erd', [erd::class, 'index']);

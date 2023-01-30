@@ -8,6 +8,7 @@ use App\Models\OutletBtn;
 use App\Models\KantorCabang;
 use App\Models\Items;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 
 class UserController extends Controller
@@ -52,10 +53,11 @@ class UserController extends Controller
         User::create($data);
         //$request->session()->flash('success', 'Registration Successfull! Please Login');
  
-        return redirect()->back()->with('success', 'Registration Successfull! Please Login');
+        return redirect('/akun');
     }
     public function edit($id){
         if (Auth::user()->role == 'superadmin') {
+            $user = User::find($id);
             return view('user.edit',compact('user'));
         } else {
             return view('user.index');
@@ -80,6 +82,14 @@ class UserController extends Controller
             $user->image = $filename;
         }
         $user->save();
-        return redirect()->back()->with('status','Pesan : User telah diperbarui');
+        return redirect('/akun');
+    }
+    public function destroy($id)
+    {
+        $userdestroy = User::find($id);
+    
+        $userdestroy->delete();
+
+        return redirect('/akun');
     }
 }

@@ -16,6 +16,7 @@
 </head>
 
 <body>
+
     <div class="user30">
         <div class="dashboard-parent5">
             <div class="dashboard11">
@@ -57,7 +58,7 @@
                             <td>{{$p->user_telp}}</td>
 
 
-                            <td><a href="/updateuser/{{$p->id}}"><img class="next-page-icon31"
+                            <td><a href="/edit-user/{{$p->id}}"><img class="next-page-icon31"
                                         src="img/next-page25@2x.png" alt=""></a></td>
 
 
