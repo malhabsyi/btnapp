@@ -14,6 +14,8 @@ class KantorCabang extends Model
         'kantor_cabang_location',
         'kantor_cabang_sbh',
         'kantor_cabang_note',
+        'kantor_cabang_image'
+
     ];
     public function user()
     {

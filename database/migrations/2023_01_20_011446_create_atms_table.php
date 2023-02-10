@@ -16,7 +16,9 @@ class CreateAtmsTable extends Migration
         Schema::create('atms', function (Blueprint $table) {
             $table->id();
             $table->string('atm_location');
-            $table->string('atm_deadline');
+            $table->string('atm_deadline_tahun');
+            $table->integer('atm_deadline_bulan');
+            $table->integer('atm_deadline_tanggal');
             $table->string('atm_note');
             $table->string('atm_status');
             $table->string('atm_jenis');

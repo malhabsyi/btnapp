@@ -26,6 +26,14 @@ class UserController extends Controller
     }
     public function store(Request $request){
 
+        $currentDateTime = Carbon::now();
+
+        // Get the month of the current date and time
+        $currentMonth = $currentDateTime->month;
+        $currentYear = $currentDateTime->year;
+        
+        $last_login_bulan = (int) $currentMonth;
+        $last_login_tahun = (int) $currentYear;
         
         $validated=$request->validate([
             'user_name' => 'required',
@@ -41,8 +49,10 @@ class UserController extends Controller
             'password' => $validated['password'],
             'role' => $validated['role'],
             'user_telp' => $validated['user_telp'],
+            'last_login_tahun' => $last_login_tahun,
+            'last_login_bulan' => $last_login_bulan,
             'kantor_cabang_id' => $validated['kantor_cabang_id'],
-            'last_login'=> Carbon::now()->format('Y/m'),
+            
             'user_image'=> 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png'
             
         ];
@@ -51,7 +61,7 @@ class UserController extends Controller
 
         
         User::create($data);
-        //$request->session()->flash('success', 'Registration Successfull! Please Login');
+        //$request->session()-  >flash('success', 'Registration Successfull! Please Login');
  
         return redirect('/akun');
     }

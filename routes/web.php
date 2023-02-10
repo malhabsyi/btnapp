@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\erd;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\KantorcabangController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 
@@ -31,7 +32,13 @@ Route::group(['middleware' =>['auth','cekrole:superadmin,admin']],function(){
     //LOGOUT
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-    //DASHBOARD 
+    //DASHBOARD KANTOR CABANG
+    Route::get('/kantorcabang',[KantorcabangController::class, 'index'])->name('kantorcabang');
+    Route::get('edit-kantorcabang/{id}',[KantorcabangController::class, 'edit']);
+    Route::get('overview-kantorcabang/{id}',[KantorcabangController::class, 'overview']);
+    Route::put('update-kantorcabang/{id}',[KantorcabangController::class, 'update']);
+    Route::post('delete-kantorcabang/{id}',[KantorcabangController::class, 'destroy']);
+
 
 });
 Route::group(['middleware' =>['auth','cekrole:superadmin']],function(){

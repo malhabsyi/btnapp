@@ -37,15 +37,24 @@ class HomeController extends Controller
         $persenmilikoutlet = round($persenmilikoutlet);
 
         $userlogin = Auth::user();
-        $userkcb = User::where('kantor_cabang_id',$userlogin->kantor_cabang_id);
+        
+        
+        //NOTIFICATION
+        $outletnotif = OutletBtn::where('outlet_deadline_tahun',$userlogin->last_login_tahun)->where('outlet_status', 'sewa')->get();
+        $outletnotif = OutletBtn::where('outlet_deadline_tahun',$userlogin->last_login_tahun)->where('outlet_status', 'sewa')->get();
+        $atmnotif = Atm::where('atm_deadline_bulan',$userlogin->last_login_bulan+3)->where('atm_status', 'sewa')->get();
+        $atmnotif = Atm::where('atm_deadline_bulan',$userlogin->last_login_bulan+2)->where('atm_status', 'sewa')->get();
+        $atmnotif = Atm::where('atm_deadline_bulan',$userlogin->last_login_bulan+1)->where('atm_status', 'sewa')->get();
+        $atmnotif = Atm::where('atm_deadline_bulan',$userlogin->last_login_bulan)->where('atm_status', 'sewa')->get();
 
-        $persenbelumdibayar = OutletBtn::where('outlet_deadline',$userlogin->last_login)->where('outlet_status', 'sewa');
+
+        $persenbelumdibayar = OutletBtn::where('outlet_deadline_tahun',$userlogin->last_login_tahun)->where('outlet_status', 'sewa');
         $persenbelumdibayar = ($persenbelumdibayar->count()/$nalloutlet)*100;
         $persenbelumdibayar = round($persenbelumdibayar);
         $persensudahdibayar = 100-$persenbelumdibayar;
 
         
-        return view ('homepage.index',compact('nalloutlet','persensudahdibayar','persenbelumdibayar','persensewaoutlet','persenmilikoutlet','alloutlet','natmbiasa','natmcrm','natmmkk','noutlet','nkantorcabang','userlogin','userkcb'));
+        return view ('homepage.index',compact('atmnotif','outletnotif','nalloutlet','persensudahdibayar','persenbelumdibayar','persensewaoutlet','persenmilikoutlet','alloutlet','natmbiasa','natmcrm','natmmkk','noutlet','nkantorcabang','userlogin'));
 
     }
 }

@@ -88,8 +88,6 @@
                     <p class="per-bulan-februari">per Bulan Februari 2023</p>
                 </b>
             </div>
-            
-            
             <div class="circle-wrap">
                 <div class="circle">
                     <div class="mask half">
@@ -145,7 +143,7 @@
                     </div>
                 </a>
                 @endif
-                <a href="/KantorCabang" style="color:#d0d2da">
+                <a href="{{ 'kantorcabang' }}" style="color:#d0d2da">
                     <div class="outlet16">
                         <div class="outlet-child8"></div>
                         <div class="kantor-cabang-parent2">
@@ -175,7 +173,7 @@
         <img class="iconlylightfilter4" alt="" src="img/iconlylightfilter.svg" />
         <div class="notification9">Notification</div>
         {{ $loc=1 }}
-        @foreach ($alloutlet as $notif)
+        @foreach ($outletnotif as $notif)
         {{ $loc=$loc+1 }}
         <div class="g11{{ $loc }}">
             <div class="g1-child10"></div>
@@ -185,8 +183,8 @@
             </div>
             <div class="jatuh-tempo12">Jatuh Tempo</div>
             <div class="outlet-kc-mulyosari-container12">
-                <b>{{ $notif->outlet_name }}</b><span> pada </span><b>{{ $notif->kantor_cabang_id }}</b><span> mengalami tenggat
-                    waktu pembayaran pada tanggal </span><b>{{ $notif->outlet_deadline }} Februari 2023.</b>
+                <b>{{ $notif->outlet_name }}</b><span> pada </span><b>{{ $notif->kantorcabang->kantor_cabang_name }}</b><span> mengalami tenggat
+                    waktu pembayaran pada bulan </span><b>{{ $notif->outlet_deadline_bulan }}</b><span> tahun </span><b>{{ $notif->outlet_deadline_tahun }}.</b>
             </div>
         </div>
         @endforeach

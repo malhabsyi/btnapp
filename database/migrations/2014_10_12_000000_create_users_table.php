@@ -21,7 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('role');
             $table->rememberToken();
-            $table->String('last_login');
+            $table->integer('last_login_tahun');
+            $table->integer('last_login_bulan');
             $table->String('user_telp');
             $table->String('user_image');
             $table->foreignId('kantor_cabang_id');

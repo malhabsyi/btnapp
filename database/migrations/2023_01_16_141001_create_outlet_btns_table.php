@@ -17,7 +17,8 @@ class CreateOutletBtnsTable extends Migration
             $table->id();
             $table->string('outlet_name');
             $table->string('outlet_location');
-            $table->string('outlet_deadline');
+            $table->integer('outlet_deadline_tahun');
+            $table->integer('outlet_deadline_bulan');
             $table->string('outlet_note');
             $table->string('outlet_status');
             $table->foreignId('kantor_cabang_id');

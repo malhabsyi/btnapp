@@ -17,6 +17,10 @@ class CreateKantorCabangsTable extends Migration
             $table->id();
             $table->string('kantor_cabang_name');
             $table->string('kantor_cabang_location');
+            $table->string('kantor_cabang_sbh');
+            $table->string('kantor_cabang_note');
+            $table->string('kantor_cabang_image');
+    
         });
     }
 

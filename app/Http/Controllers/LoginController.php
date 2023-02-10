@@ -27,7 +27,19 @@ class LoginController extends Controller
             if(Auth::attempt($credentials)){
                 
                 $userlogin = Auth::user();
-                $userlogin->last_login = Carbon::now()->format('Y/m');
+                // Get the current date and time
+                $currentDateTime = Carbon::now();
+
+                // Get the month of the current date and time
+                $currentMonth = $currentDateTime->month;
+                $currentYear = $currentDateTime->year;
+
+                // Get the authenticated user
+                $userlogin = Auth::user();
+                
+                $userlogin->last_login_bulan = (int) $currentMonth;
+                $userlogin->last_login_tahun = (int) $currentYear;
+
                 $userlogin->save();
                 $request->session()->regenerate();
                 return redirect()->intended('/home');

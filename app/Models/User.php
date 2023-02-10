@@ -24,7 +24,9 @@ class User extends Authenticatable
         'role',
         'user_image',
         'kantor_cabang_id',
-        'last_login',
+        'last_login_tanggal',
+        'last_login_bulan',
+        'last_login_tahun',
         'user_telp',
         
     ];
